@@ -9,12 +9,17 @@ function usage {
     exit;
 }
 
+function LOG {
+    echo --- $*
+}
+
 if [ $# -lt 4 ]; then
     echo "Lacking in arguments"
     usage;
 fi;
-sleep 1;
+#sleep 1;
 
+WDIR=$PWD
 WARF=$1
 NAME=$2
 OLDV=$3
@@ -28,7 +33,16 @@ case $5 in
         ONLY_ZIP=false
         ;;
 esac;
-echo ONLY_ZIP: ${ONLY_ZIP}
+LOG "WDIR: ${WDIR}"
+LOG "WARF: ${WARF}"
+LOG "NAME: ${NAME}"
+LOG "OLDV: ${OLDV}"
+LOG "NEWV: ${NEWV}"
+LOG "ONLY_ZIP: ${ONLY_ZIP}"
 sleep 1;
+
+# prepare working directory
+# unpacking war
+# generate zip file
 
 exit;
