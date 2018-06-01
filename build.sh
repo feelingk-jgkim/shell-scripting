@@ -44,10 +44,23 @@ function unpackingWar {
         ERR "${WARF} file is not exists."
         exit;
     fi
+    
+    cd ${WDIR}
+    INFO "Go to ${WDIR} directory."
+    jar xvf ${WARF}
+    INFO "${WARF} file is decompressed."
+    cd ${PWD}
 }
 
 function generateZipFile {
-    exit;
+    ZIPF="../${NAME}-${NEWV}.zip"
+
+    cd ${WDIR}
+    zip -r ${ZIPF} * .[^.]*
+    if [ -f "${ZIPF}" ]; then
+        INFO "${ZIPF} is created."
+    fi
+    cd ${PWD}
 }
 
 if [ $# -lt 4 ]; then
