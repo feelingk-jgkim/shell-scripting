@@ -10,27 +10,44 @@ function usage {
 }
 
 function LOG {
-    echo --- $*
+    echo "$*"
+}
+
+function ERR {
+    LOG "[ERROR] $*"
+}
+
+function INFO {
+    LOG "[INFO ] $*"
 }
 
 function prepareWorkingDirectory {
+    OLD_DIR="${NAME}-${OLDV}"
     NEW_DIR="${NAME}-${NEWV}"
     if [ -d "${NEW_DIR}" ]; then
-        LOG "${NEW_DIR} directory is already exists."
+        ERR "${NEW_DIR} directory is already exists."
         exit;
     fi
-    mkdir ${NEW_DIR}
-    if [ -d "${NEW_DIR}" ]; then
-        LOG "${NEW_DIR} directory is created."
+    if [ -d "${OLD_DIR}" ]; then
+        mv ${OLD_DIR} ${NEW_DIR}
+        INFO "${OLD_DIR} moved to ${NEW_DIR}"
+    else
+        mkdir ${NEW_DIR}
+        if [ -d "${NEW_DIR}" ]; then
+            LOG "${NEW_DIR} directory is created."
+        fi
     fi
 }
 
 function unpackingWar {
-
+    if [ ! -f "${WARF}" ]; then
+        ERR "${WARF} file is not exists."
+        exit;
+    fi
 }
 
 function generateZipFile {
-
+    exit;
 }
 
 if [ $# -lt 4 ]; then
@@ -53,12 +70,12 @@ case $5 in
         ONLY_ZIP=false
         ;;
 esac;
-LOG "WDIR: ${WDIR}"
-LOG "WARF: ${WARF}"
-LOG "NAME: ${NAME}"
-LOG "OLDV: ${OLDV}"
-LOG "NEWV: ${NEWV}"
-LOG "ONLY_ZIP: ${ONLY_ZIP}"
+INFO "WDIR: ${WDIR}"
+INFO "WARF: ${WARF}"
+INFO "NAME: ${NAME}"
+INFO "OLDV: ${OLDV}"
+INFO "NEWV: ${NEWV}"
+INFO "ONLY_ZIP: ${ONLY_ZIP}"
 sleep 1;
 
 # prepare working directory
