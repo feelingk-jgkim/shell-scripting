@@ -13,6 +13,26 @@ function LOG {
     echo --- $*
 }
 
+function prepareWorkingDirectory {
+    NEW_DIR="${NAME}-${NEWV}"
+    if [ -d "${NEW_DIR}" ]; then
+        LOG "${NEW_DIR} directory is already exists."
+        exit;
+    fi
+    mkdir ${NEW_DIR}
+    if [ -d "${NEW_DIR}" ]; then
+        LOG "${NEW_DIR} directory is created."
+    fi
+}
+
+function unpackingWar {
+
+}
+
+function generateZipFile {
+
+}
+
 if [ $# -lt 4 ]; then
     echo "Lacking in arguments"
     usage;
@@ -42,7 +62,12 @@ LOG "ONLY_ZIP: ${ONLY_ZIP}"
 sleep 1;
 
 # prepare working directory
+prepareWorkingDirectory;
+
 # unpacking war
+unpackingWar;
+
 # generate zip file
+generateZipFile;
 
 exit;
