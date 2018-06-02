@@ -86,7 +86,7 @@ case $5 in
         ONLY_ZIP=false
         ;;
 esac;
-INFO "WDIR: ${WDIR}"
+INFO "CDIR: ${CDIR}"
 INFO "WARF: ${WARF}"
 INFO "NAME: ${NAME}"
 INFO "OLDV: ${OLDV}"
