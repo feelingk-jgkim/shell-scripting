@@ -92,22 +92,27 @@ INFO "NAME: ${NAME}"
 INFO "OLDV: ${OLDV}"
 INFO "NEWV: ${NEWV}"
 INFO "ONLY_ZIP: ${ONLY_ZIP}"
-sleep 10;
+sleep 2;
 
 # prepare working directory
-if [ ${ONLY_ZIP}==true ]; then
-    INFO "prepareWorkingDirectory() skipped."
-else
-    prepareWorkingDirectory;
-fi
+case ${ONLY_ZIP} in
+    true)
+        INFO "prepareWorkingDirectory() skipped."
+        ;;
+    *)
+        prepareWorkingDirectory;
+esac;
 sleep 1;
 
 # unpacking war
-if [ ${ONLY_ZIP}==true ]; then
-    INFO "unpackingWar() skipped."
-else
-    unpackingWar;
-fi
+case ${ONLY_ZIP} in
+    true)
+        INFO "unpackingWar() skipped."
+        ;;
+    *)
+        unpackingWar;
+    ;;
+esac;
 sleep 1;
 
 # generate zip file
