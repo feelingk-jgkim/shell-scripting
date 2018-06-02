@@ -46,22 +46,24 @@ function unpackingWar {
         exit;
     fi
     
+    WDIR=${CDIR}/${NAME}-${NEWV}
     cd ${WDIR}
     INFO "Go to ${WDIR} directory."
     jar xvf ${WARF}
     INFO "${WARF} file is decompressed."
-    cd ${PWD}
+    cd ${CDIR}
 }
 
 function generateZipFile {
     ZIPF="../${NAME}-${NEWV}.zip"
 
+    WDIR=${CDIR}/${NAME}-${NEWV}
     cd ${WDIR}
     zip -r ${ZIPF} * .[^.]*
     if [ -f "${ZIPF}" ]; then
         INFO "${ZIPF} is created."
     fi
-    cd ${PWD}
+    cd ${CDIR}
 }
 
 if [ $# -lt 4 ]; then
@@ -70,7 +72,7 @@ if [ $# -lt 4 ]; then
 fi;
 #sleep 1;
 
-WDIR=$PWD
+CDIR=$PWD
 WARF=$1
 NAME=$2
 OLDV=$3
@@ -90,7 +92,7 @@ INFO "NAME: ${NAME}"
 INFO "OLDV: ${OLDV}"
 INFO "NEWV: ${NEWV}"
 INFO "ONLY_ZIP: ${ONLY_ZIP}"
-sleep 1;
+sleep 10;
 
 # prepare working directory
 if [ ${ONLY_ZIP}==true ]; then
