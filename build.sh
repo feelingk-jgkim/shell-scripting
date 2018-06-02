@@ -98,6 +98,7 @@ if [ ${ONLY_ZIP}==true ]; then
 else
     prepareWorkingDirectory;
 fi
+sleep 1;
 
 # unpacking war
 if [ ${ONLY_ZIP}==true ]; then
@@ -105,8 +106,11 @@ if [ ${ONLY_ZIP}==true ]; then
 else
     unpackingWar;
 fi
+sleep 1;
 
 # generate zip file
 generateZipFile;
+sleep 1;
 
+# end of shell
 exit;
