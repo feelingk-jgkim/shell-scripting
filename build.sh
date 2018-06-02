@@ -10,7 +10,8 @@ function usage {
 }
 
 function LOG {
-    echo "$*"
+    timestamp=`date +"%T"`;
+    echo "${timestamp} $*"
 }
 
 function ERR {
@@ -92,10 +93,18 @@ INFO "ONLY_ZIP: ${ONLY_ZIP}"
 sleep 1;
 
 # prepare working directory
-prepareWorkingDirectory;
+if [ ${ONLY_ZIP}==true ]; then
+    INFO "prepareWorkingDirectory() skipped."
+else
+    prepareWorkingDirectory;
+fi
 
 # unpacking war
-unpackingWar;
+if [ ${ONLY_ZIP}==true ]; then
+    INFO "unpackingWar() skipped."
+else
+    unpackingWar;
+fi
 
 # generate zip file
 generateZipFile;
